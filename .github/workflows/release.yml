@@ -88,7 +88,7 @@ jobs:
             [osx-arm64]=agent-client-osx-arm64.zip
           )
           for rid in "${!rids[@]}"; do
-            dotnet publish WtAgent.Client.csproj -c Release -r $rid --self-contained false -o out/$rid
+            dotnet publish WTangent.Tui.csproj -c Release -r $rid --self-contained false -o out/$rid
             # 入口文件打进组件包：安装后 GetManifest 走本地缓存，不再依赖运行时网络
             cp agent-component.json out/$rid/
             (cd out/$rid && zip -qr ../${rids[$rid]} .)
