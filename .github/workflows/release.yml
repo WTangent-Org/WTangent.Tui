@@ -1,11 +1,6 @@
 name: release
 
-# Agent.Client 发布：release-please 管版本 → 合并后构建 agent-client 七平台 → 上传 release
-on:
-  push:
-    branches: [main]
-name: release
-
+# WTangent.Tui 发布：release-please 管版本 → 合并后构建 agent-client 七平台 → 上传 release
 on:
   push:
     branches: [main]
