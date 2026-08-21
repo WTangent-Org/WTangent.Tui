@@ -25,11 +25,11 @@
 
   <ItemGroup>
     <!-- 共享包：源生成器（analyzers）+ 契约（lib/net10.0）一个包 -->
-    <PackageReference Include="WTangent.Components" Version="0.0.1" PrivateAssets="all"/>
+    <PackageReference Include="WTangent.Components" Version="0.0.2" PrivateAssets="all"/>
   </ItemGroup>
 
   <ItemGroup>
     <Using Include="WTangent.Components"/>
-    <Using Include="WTangent.Core"/>
+    <!-- 不用全局 WTangent.Core：契约 Application 与 Terminal.Gui.App.Application 撞名；需要处显式 using -->
   </ItemGroup>
 </Project>

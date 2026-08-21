@@ -1,6 +1,7 @@
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
+using WTangent.Core;
 using WTangent.Tui.Store;
 
 namespace WTangent.Tui.Session;

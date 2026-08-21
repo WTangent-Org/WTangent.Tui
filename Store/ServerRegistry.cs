@@ -10,12 +10,14 @@ public sealed record RemoteEntry(string Name, string Host, int Port, string? EtC
     public string Url => $"http://{Host}:{Port}";
 }
 
-/// <summary>服务器注册表（remotes.json，[{name,host,port,etCode,kind}]）：agent remote 命令读写；
-/// clone/run 按加入码或名字取地址；last-used 缓存记录最近用的服务器（default-server 语义）。</summary>
+/// <summary>服务器注册表（remotes.json，[{name,host,port,etCode,kind}]）：wtangent remote 命令读写；
+/// clone/run 按加入码或名字取地址；last-used 缓存记录最近用的服务器（default-server 语义）。
+/// 读写优先走宿主注入的 Entry.App.Store（统一原子写 + 变更事件），未注入时回退直接文件访问。</summary>
 public sealed class ServerRegistry(string? path = null)
 {
     private string StorePath => path ?? Path.Combine(AgentPaths.DataDir, "remotes.json");
     private static string LastUsedFile => Path.Combine(AgentPaths.DataDir, "last-remote.txt");
+    private static WTangent.Core.IAppStore? AppStore => Entry.App?.Store;
 
     public void Add(string name, string host, int port, string? code = null, string kind = "lan")
     {
@@ -53,6 +55,11 @@ public sealed class ServerRegistry(string? path = null)
 
     private List<RemoteEntry> Load()
     {
+        if (AppStore is not null)
+        {
+            var viaStore = AppStore.ReadJson<List<RemoteEntry>>("remotes.json");
+            if (viaStore is not null) return viaStore;
+        }
         if (!File.Exists(StorePath)) return [];
         try
         {
@@ -88,6 +95,13 @@ public sealed class ServerRegistry(string? path = null)
 
     private sealed record OldRemote(string Name, string Url, string? EtCode, string Kind);
 
-    private void Save(List<RemoteEntry> all) =>
+    private void Save(List<RemoteEntry> all)
+    {
+        if (AppStore is not null)
+        {
+            AppStore.WriteJson("remotes.json", all);
+            return;
+        }
         File.WriteAllText(StorePath, JsonSerializer.Serialize(all, new JsonSerializerOptions { WriteIndented = true }));
+    }
 }
