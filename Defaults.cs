@@ -3,11 +3,10 @@ using WTangent.Tui.Store;
 
 namespace WTangent.Tui;
 
-/// <summary>客户端顶级行为（[AgentDefault] 标记，源生成器生成 Entry.Default）</summary>
+/// <summary>客户端顶级行为（手写 Entry 引用：Entry.Default => Defaults.RunTui）</summary>
 public static class Defaults
 {
     /// <summary>启动 TUI 终端聊天（目标 serve = 本地已装 → 缓存 remote）</summary>
-    [AgentDefault]
     public static int RunTui(string[] args)
     {
         var url = ResolveServeUrl();
