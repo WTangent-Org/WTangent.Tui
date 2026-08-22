@@ -1,5 +1,27 @@
 # Changelog
 
+## [0.6.0](https://github.com/WTangent-Org/WTangent.Tui/compare/v0.5.0...v0.6.0) (2026-08-22)
+
+
+### ✨ 新功能
+
+* IEntry 元组命令（父路径挂接）+ 三形态（cmd/sub/tool）+ 类型字段废弃 ([013070b](https://github.com/WTangent-Org/WTangent.Tui/commit/013070bb317bf374e1fc12ff59376b13f6889eb7))
+* IEntry 手写入口（0.0.3）——类型字段废弃，能力由 Entry 声明（Commands/Default/Tools + StartAsync 生命周期） ([8272d4f](https://github.com/WTangent-Org/WTangent.Tui/commit/8272d4f4f12e9b834657dd5a8d5ff3c1c8b5fb55))
+* tui 组件（WTangent.Tui 命名空间，WTangent.Components 单包） ([144b611](https://github.com/WTangent-Org/WTangent.Tui/commit/144b6116d3cbcf1d6d5dc7d6221536c25372a9ef))
+* 组件类型收敛 ui/cmd/tool + client 组件拆分（remote/run/web 归 client；tui 纯 UI；serve type=cmd；官方组件自动安装） ([246cf45](https://github.com/WTangent-Org/WTangent.Tui/commit/246cf4595d61353c7188d19bbc60522a9e212161))
+
+
+### 🐛 修复
+
+* release.yml 重复 name/on 头部（workflow startup_failure） ([e6e71de](https://github.com/WTangent-Org/WTangent.Tui/commit/e6e71de729adbb6b0c9bded3398024ba195aba61))
+
+
+### 🧹 其他
+
+* csproj 文件名统一 WTangent.*（workflow/release-please/deps 引用同步） ([88fd0df](https://github.com/WTangent-Org/WTangent.Tui/commit/88fd0dff4a0edb7f58db15e5567f8c6117524a9b))
+* WTangent.Components 0.0.1→0.0.2（Application 契约） ([5aa267c](https://github.com/WTangent-Org/WTangent.Tui/commit/5aa267cf999f70267f68c57615ec958deecaac03))
+* WTangent.Components 引用 0.4.0→0.0.1（对齐发布版本） ([076e6e4](https://github.com/WTangent-Org/WTangent.Tui/commit/076e6e42e927469192854a302fa15b502bdf3074))
+
 ## [0.5.0](https://github.com/wtommy932/WtAgent.Client/compare/v0.4.0...v0.5.0) (2026-08-19)
 
 
