@@ -17,7 +17,7 @@ public sealed class ServerRegistry(string? path = null)
 {
     private string StorePath => path ?? Path.Combine(AgentPaths.DataDir, "remotes.json");
     private static string LastUsedFile => Path.Combine(AgentPaths.DataDir, "last-remote.txt");
-    private static WTangent.Core.IAppStore? AppStore => Entry.Current?.App?.Store;
+    private static WTangent.Core.IAppStore? AppStore => Entry.App?.Store;
 
     public void Add(string name, string host, int port, string? code = null, string kind = "lan")
     {
