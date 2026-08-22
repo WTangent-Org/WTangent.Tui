@@ -2,26 +2,19 @@ using WTangent.Core;
 
 namespace WTangent.Tui;
 
-/// <summary>tui 组件入口（手写实现 IEntry）：纯 UI 组件，只有顶级 Default（TUI 终端聊天）。
-/// 生命周期：StartAsync 存宿主注入的 Application（组件内静态访问 Entry.App）。</summary>
-public sealed class Entry : IEntry
+/// <summary>tui 组件入口（[AgentEntry] 元数据 + 生命周期钩子；纯 UI：只有顶级 Default）。</summary>
+[AgentEntry("tui", "tui 终端", false)]
+public sealed partial class Entry : IEntry
 {
     /// <summary>宿主运行时上下文（StartAsync 注入；组件内部静态访问）</summary>
     public static Application? App { get; private set; }
 
-    public string Identifier => "tui";
-    public string Name => "tui 终端";
+    /// <summary>顶级行为：TUI 终端聊天</summary>
     public Func<string[], int>? Default => Defaults.RunTui;
 
-    public Task StartAsync(Application app)
-    {
-        App = app;
-        return Task.CompletedTask;
-    }
+    [EntryStart]
+    private static void OnStart(Application app) => App = app;
 
-    public Task StopAsync()
-    {
-        App = null;
-        return Task.CompletedTask;
-    }
+    [EntryStop]
+    private static void OnStop() => App = null;
 }
