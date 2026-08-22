@@ -1,5 +1,1 @@
-{
-  "name": "tui",
-  "type": "tui",
-  "asset": "agent-client"
-}
+{ "name": "tui", "asset": "agent-client" }
