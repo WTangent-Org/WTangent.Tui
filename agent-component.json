@@ -1,1 +1,1 @@
-{ "name": "tui", "asset": "agent-client" }
+{ "name": "tui", "asset": "agent-client", "minCore": "0.0.9" }
