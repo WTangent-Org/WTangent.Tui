@@ -76,7 +76,7 @@ public sealed partial class ChatView
                 }
             }
         }
-        catch { }
+        catch (Exception ex) when (ex is ArgumentException or InvalidOperationException) { }
         // 行号与折叠块必须一一对应，否则索引错位（点击会命中错误块）。不匹配时清空禁用点击，等下次结构变化重扫
         if (_markerRows.Count != _foldables.Count)
             _markerRows.Clear();

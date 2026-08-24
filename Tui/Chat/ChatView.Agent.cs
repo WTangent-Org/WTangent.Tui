@@ -184,7 +184,7 @@ public sealed partial class ChatView
     }
 
     /// <summary>取出并停止 spinner（Invoke 内调用）：置空字段 + 移除定时器，返回 null 表示不存在</summary>
-    private Spinner? TakeSpinner(ref Spinner? field)
+    private static Spinner? TakeSpinner(ref Spinner? field)
     {
         var s = field;
         field = null;
@@ -237,7 +237,7 @@ public sealed partial class ChatView
                 if (s is { Length: > 0 }) return CollapseSpaces(s);
             }
         }
-        catch { }
+        catch (JsonException) { }
         return "";
     }
 

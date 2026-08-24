@@ -44,7 +44,7 @@ public static class ConfigStore
             if (stored != null)
                 cfg = stored with { Providers = [.. stored.Providers.Select(p => p with { ApiKey = ReadKey(p.Name) })] };
         }
-        catch { }
+        catch (Exception ex) when (ex is JsonException or IOException) { }
         return cfg;
     }
 

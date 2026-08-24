@@ -27,7 +27,7 @@ internal sealed class Foldable
 
     /// <summary>标记行前缀（行号定位用，与当前折叠状态/按钮一致；markdown 加粗渲染后可见文本不含 **）</summary>
     public string Marker => Kind == "thinking"
-        ? (Collapsed ? $"+ {Badge} · {Title}{Duration}" : $"- {Badge}{Duration}")
+        ? Collapsed ? $"+ {Badge} · {Title}{Duration}" : $"- {Badge}{Duration}"
         : Collapsed ? $"+ {Badge} · {ShortTitle}"
         : CanFold ? $"- {Badge} · {ShortTitle}" : $"{Badge} · {ShortTitle}";
 
@@ -50,10 +50,10 @@ internal sealed class Foldable
         if (Kind == "thinking")
         {
             var mark = Collapsed ? "+" : "-";
-            if (Collapsed)
-                return $"**{mark} {Badge} · {MdEscape(Title)}{Duration}**\n\n";
-            // 展开：标记行（加粗、无摘要），思维链全文（普通文本，不带 > 前缀）
-            return $"**{mark} {Badge}{Duration}**\n\n{Content}";
+            return Collapsed
+                ? $"**{mark} {Badge} · {MdEscape(Title)}{Duration}**\n\n"
+                // 展开：标记行（加粗、无摘要），思维链全文（普通文本，不带 > 前缀）
+                : $"**{mark} {Badge}{Duration}**\n\n{Content}";
         }
         if (string.IsNullOrWhiteSpace(Content))
             return $"**{Badge} · {DisplayTitle}**（无输出）\n\n";

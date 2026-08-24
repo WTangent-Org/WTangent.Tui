@@ -28,8 +28,7 @@ public static class Defaults
         var last = ServerRegistry.GetLastUsed();
         if (last is { Length: > 0 })
         {
-            if (last.StartsWith("http", StringComparison.OrdinalIgnoreCase)) return last;
-            return new ServerRegistry().Find(last)?.Url;
+            return last.StartsWith("http", StringComparison.OrdinalIgnoreCase) ? last : new ServerRegistry().Find(last)?.Url;
         }
         return null;
     }

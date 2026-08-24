@@ -170,5 +170,5 @@ public sealed partial class ChatView : Markdown
         ScrollToEnd();
     }
 
-    private void Invoke(Action a) => TuiRepl.App.Invoke(a);
+    private static void Invoke(Action a) => TuiRepl.App.Invoke(a);
 }

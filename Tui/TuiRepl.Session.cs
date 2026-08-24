@@ -32,7 +32,7 @@ public static partial class TuiRepl
             _win = new Window { Title = "Agent TUI", X = 0, Y = 0, Width = Dim.Fill(), Height = Dim.Fill() };
 
             // 消息区：完整 Markdown 渲染 + thinking/工具折叠 + 滚动跟随
-            _messages = new ChatView() { X = 0, Y = 0, Width = Dim.Fill(), Height = Dim.Fill() - 5 };
+            _messages = new() { X = 0, Y = 0, Width = Dim.Fill(), Height = Dim.Fill() - 5 };
             var sep = FullWidthSep(Pos.Bottom(_messages));
             _status = new Label { X = 1, Y = Pos.Bottom(sep), Width = Dim.Fill(1) };
             var sep2 = FullWidthSep(Pos.Bottom(_status));
@@ -91,7 +91,7 @@ public static partial class TuiRepl
                     _messages.ClearAll();
                     _messages.AppendAssistant("[消息区已清空]");
                     return;
-                case var p when p.StartsWith("/thinking"):
+                case var _ when prompt.StartsWith("/thinking"):
                     _messages.CycleThinkingMode();
                     _messages.AppendUser($"/thinking → {_messages.ThinkingMode}");
                     return;

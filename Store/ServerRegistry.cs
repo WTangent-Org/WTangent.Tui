@@ -1,4 +1,5 @@
 using System.Text.Json;
+using WTangent.Core;
 
 namespace WTangent.Tui.Store;
 
@@ -17,7 +18,7 @@ public sealed class ServerRegistry(string? path = null)
 {
     private string StorePath => path ?? Path.Combine(AgentPaths.DataDir, "remotes.json");
     private static string LastUsedFile => Path.Combine(AgentPaths.DataDir, "last-remote.txt");
-    private static WTangent.Core.IAppStore? AppStore => Entry.App?.Store;
+    private static IAppStore? AppStore => Entry.App.Store;
 
     public void Add(string name, string host, int port, string? code = null, string kind = "lan")
     {
@@ -50,16 +51,13 @@ public sealed class ServerRegistry(string? path = null)
     public static void SetLastUsed(string nameOrUrl)
     {
         try { Directory.CreateDirectory(Path.GetDirectoryName(LastUsedFile)!); File.WriteAllText(LastUsedFile, nameOrUrl); }
-        catch { }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException) { }
     }
 
     private List<RemoteEntry> Load()
     {
-        if (AppStore is not null)
-        {
-            var viaStore = AppStore.ReadJson<List<RemoteEntry>>("remotes.json");
-            if (viaStore is not null) return viaStore;
-        }
+        var viaStore = AppStore?.ReadJson<List<RemoteEntry>>("remotes.json");
+        if (viaStore is not null) return viaStore;
         if (!File.Exists(StorePath)) return [];
         try
         {
@@ -95,6 +93,8 @@ public sealed class ServerRegistry(string? path = null)
 
     private sealed record OldRemote(string Name, string Url, string? EtCode, string Kind);
 
+    private static readonly JsonSerializerOptions Indented = new() { WriteIndented = true };
+
     private void Save(List<RemoteEntry> all)
     {
         if (AppStore is not null)
@@ -102,6 +102,6 @@ public sealed class ServerRegistry(string? path = null)
             AppStore.WriteJson("remotes.json", all);
             return;
         }
-        File.WriteAllText(StorePath, JsonSerializer.Serialize(all, new JsonSerializerOptions { WriteIndented = true }));
+        File.WriteAllText(StorePath, JsonSerializer.Serialize(all, Indented));
     }
 }

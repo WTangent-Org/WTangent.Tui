@@ -26,7 +26,7 @@ internal static class ToolArgs
             if (doc.RootElement.TryGetProperty(prop, out var p))
                 return p.GetString() ?? "";
         }
-        catch { }
+        catch (JsonException) { }
         return "";
     }
 }
