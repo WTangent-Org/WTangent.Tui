@@ -1,5 +1,5 @@
 using System.Diagnostics;
-using WTangent.Tui.Session;
+using WTangent.Core;
 using WTangent.Tui.Tui.Chat;
 using Terminal.Gui.Drawing;
 using Terminal.Gui.Editor;

@@ -1,4 +1,4 @@
-using WTangent.Tui.Session;
+using WTangent.Core;
 using Microsoft.Data.Sqlite;
 
 namespace WTangent.Tui.Store;

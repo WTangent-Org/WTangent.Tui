@@ -1,4 +1,4 @@
-using WTangent.Tui.Session;
+using WTangent.Core;
 
 namespace WTangent.Tui.Tui;
 

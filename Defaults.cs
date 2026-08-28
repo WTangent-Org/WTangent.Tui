@@ -1,5 +1,5 @@
 
-using WTangent.Tui.Store;
+using WTangent.Core;
 
 namespace WTangent.Tui;
 
@@ -28,7 +28,7 @@ public static class Defaults
         var last = ServerRegistry.GetLastUsed();
         if (last is { Length: > 0 })
         {
-            return last.StartsWith("http", StringComparison.OrdinalIgnoreCase) ? last : new ServerRegistry().Find(last)?.Url;
+            return last.StartsWith("http", StringComparison.OrdinalIgnoreCase) ? last : new ServerRegistry(store: Entry.App.Store).Find(last)?.Url;
         }
         return null;
     }

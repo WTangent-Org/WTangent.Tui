@@ -1,7 +1,7 @@
 using Terminal.Gui.App;
 using Terminal.Gui.ViewBase;
 using Terminal.Gui.Views;
-using WTangent.Tui.Store;
+using WTangent.Core;
 
 namespace WTangent.Tui.Tui;
 
@@ -20,7 +20,7 @@ public static partial class TuiRepl
 
     private static void RunCore(string url)
     {
-        App = Application.Create();
+        App = Terminal.Gui.App.Application.Create();
         App.Init();
         // 危险命令确认：TUI 内联 Dialog（ShowDialog 内部走公开的 App + UiDispatcher）
         ConfirmProvider.Confirm = prompt => ShowDialog("危险命令确认", prompt);
