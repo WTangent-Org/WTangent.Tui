@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          path: WTangent.Tui
 
       - uses: actions/setup-dotnet@v4
         with:
@@ -24,4 +26,4 @@ jobs:
           path: WTangent.Components
 
       - name: dotnet build（Release）
-        run: dotnet build WTangent.Tui.csproj -c Release --nologo
+        run: dotnet build WTangent.Tui/WTangent.Tui.csproj -c Release --nologo
