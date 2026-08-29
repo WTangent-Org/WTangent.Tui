@@ -1,5 +1,30 @@
 # Changelog
 
+## [0.6.1](https://github.com/WTangent-Org/WTangent.Tui/compare/v0.6.0...v0.6.1) (2026-08-29)
+
+
+### ✨ 新功能
+
+* App 静态属性构造注入（PCL-CE 式）：生成器产 static App + ctor，IEntry 移除 App 成员 ([e99d375](https://github.com/WTangent-Org/WTangent.Tui/commit/e99d37587997cb035825635e3709cd0f2174e8c8))
+* 最终特性集 [AgentEntry(id,name,isAsync)]/[EntryStart]/[EntryStop]/[AgentCommand(parent)]/[AgentTool] ([85a8ad4](https://github.com/WTangent-Org/WTangent.Tui/commit/85a8ad4ac453c16966a1ca51213ee752a632f22b))
+* 构造注入 App（无 null!）+ Current 静态桥（PCL-CE 式）；钩子实例方法，纯业务 ([584af01](https://github.com/WTangent-Org/WTangent.Tui/commit/584af01f4681fda8e3c350e7281a833f6fb04853))
+
+
+### 🐛 修复
+
+* CI 布局——本仓 checkout 进同名子目录复刻本地工作区布局（ProjectReference 的 ../ 不再越出工作区），构建路径加前缀 ([c8b0531](https://github.com/WTangent-Org/WTangent.Tui/commit/c8b0531cbbafab13e6ee2edc5bc4f4763741183d))
+
+
+### 🧹 其他
+
+* Components 升 0.0.10（Application 移除 Logger/Config，统一走门面） ([60fd0c2](https://github.com/WTangent-Org/WTangent.Tui/commit/60fd0c274c462fe807ae9b3aee2ed7bf1c047d0f))
+* Components 升 0.0.11（StartAsync 无参）；R# 扫描修复 ([0f2e214](https://github.com/WTangent-Org/WTangent.Tui/commit/0f2e2144352d62e35a9f84fadf86f79e894b5732))
+* Components 升 0.0.9（ExcludeAssets=runtime）；agent-component.json 由生成器产出 ([919cf3c](https://github.com/WTangent-Org/WTangent.Tui/commit/919cf3ce8153751a3ed1da4fd45d706192fb8336))
+* csproj nuget 组补 WTangentDev 条件（dev restore 直拉模式关闭包引用，引用由 wtangent.dev.props 注入） ([85a2319](https://github.com/WTangent-Org/WTangent.Tui/commit/85a2319404bafc6603aa587a99055c13cdb05180))
+* csproj 移除无引用的 McMaster.NETCore.Plugins（旧架构残留） ([5bd1cac](https://github.com/WTangent-Org/WTangent.Tui/commit/5bd1cac4eafc1266d5eba3ad3a65420ea38bcd02))
+* csproj 补 CompilerVisibleProperty ComponentDepends（本地模式手动声明，配套生成器 depends） ([fa3e0fe](https://github.com/WTangent-Org/WTangent.Tui/commit/fa3e0feb6a805281e2cc99df696468b72e6f339d))
+* release-please 统一 always-bump-patch（版本只走 patch） ([4c6b4ba](https://github.com/WTangent-Org/WTangent.Tui/commit/4c6b4ba06dafca28b3e29ce35f1eb99f5f5eed97))
+
 ## [0.6.0](https://github.com/WTangent-Org/WTangent.Tui/compare/v0.5.0...v0.6.0) (2026-08-22)
 
 
